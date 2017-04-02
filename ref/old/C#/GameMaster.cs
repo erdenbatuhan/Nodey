@@ -7,7 +7,7 @@ public class GameMaster : MonoBehaviour {
     public AudioClip swapSound, popSound;
     public GameObject popEffect;
     public GameObject[] connectors, nodes;
-    private int treeSize;
+	private int treeSize;
 	private bool isBeingSwapped = false;
     private const float distance = 0.99f;
 
