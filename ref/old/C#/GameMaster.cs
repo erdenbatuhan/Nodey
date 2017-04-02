@@ -167,11 +167,11 @@ public class GameMaster : MonoBehaviour {
     } // .destroyConnectors(int leftchild)
 
     private bool doHaveChild(int leftParent) {
-        int rightParent = leftParent + 1;             // Sibling of Left Parent (Right Parent)
+        int rightParent = leftParent + 1;           // Sibling of Left Parent (Right Parent)
         int leftLeftChild = leftParent * 2;         // Left Child of Left Parent
         int leftRightChild = leftLeftChild + 1;     // Right Child Of Left Parent
-        int rightLeftChild = rightParent * 2;         // Left Child Of Right Parent
-        int rightRightChild = rightLeftChild + 1;  // Right Child Of Right Parent
+        int rightLeftChild = rightParent * 2;       // Left Child Of Right Parent
+        int rightRightChild = rightLeftChild + 1;   // Right Child Of Right Parent
         bool case1 = true, case2 = true, case3 = true, case4 = true;
 
         if (leftLeftChild < nodes.Length && leftRightChild < nodes.Length && rightLeftChild < nodes.Length && rightRightChild < nodes.Length) {
