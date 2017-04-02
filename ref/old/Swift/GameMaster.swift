@@ -165,10 +165,10 @@ internal class GameMaster {
             for _ in 0...1 {
                 if (currentChild <= treeSize) {
                     if (nodes[currentChild].getNodeName() != "null") {
-                        let distanceY : CGFloat = nodes[i].position.y - nodes[currentChild].position.y;
-                        let distanceX : CGFloat = nodes[i].position.x - nodes[currentChild].position.x;
+                        let distanceY : CGFloat  = nodes[i].position.y - nodes[currentChild].position.y;
+                        let distanceX : CGFloat  = nodes[i].position.x - nodes[currentChild].position.x;
                         let hypotenuse : CGFloat = hypot(distanceY, distanceX);
-                        let angle : CGFloat     = atan2(distanceY, distanceX);
+                        let angle : CGFloat      = atan2(distanceY, distanceX);
                         
                         connectors[i][currentChild] = Connector(connectorName: "\(i)-\(currentChild)", length: hypotenuse, rotation: angle,
                                                                 nodeToConnect: nodes[currentChild]);
