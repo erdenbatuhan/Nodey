@@ -7,8 +7,8 @@ public class GameMaster : MonoBehaviour {
     public AudioClip swapSound, popSound;
     public GameObject popEffect;
     public GameObject[] connectors, nodes;
-	private int treeSize;
-	private bool isBeingSwapped = false;
+    private int treeSize;
+    private bool isBeingSwapped = false;
     private const float distance = 0.99f;
 
     private void OnGUI() {
@@ -17,7 +17,7 @@ public class GameMaster : MonoBehaviour {
 
     private void Start() {
         treeSize = nodes.Length - 1;
-		isBeingSwapped = false;
+        isBeingSwapped = false;
     } // .Start()
 
     private void Update() {
@@ -43,10 +43,10 @@ public class GameMaster : MonoBehaviour {
 // If the game is running on iOS or Android (Touch Screen)
 #elif UNITY_IOS || UNITY_ANDROID
 
-		if (Input.touchCount > 0) {
-			Touch myTouch = Input.touches[0];
+        if (Input.touchCount > 0) {
+            Touch myTouch = Input.touches[0];
 
-			if (myTouch.phase == TouchPhase.Began) {
+            if (myTouch.phase == TouchPhase.Began) {
                 Vector2 tp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 int thatChild = nodeSearch(tp);
 
@@ -56,10 +56,10 @@ public class GameMaster : MonoBehaviour {
                     for (int i = nodes.Length - 2; i >= 2; i -= 2)
                         if (nodes[i] != null && nodes[i].tag != "NULL" && nodes[i + 1] != null && nodes[i + 1].tag != "NULL")
                             StartCoroutine(pop(i, false));
-            	}
-			}
-		}
-		
+                }
+            }
+        }
+        
 #endif
     } // .Update()
 
@@ -142,10 +142,10 @@ public class GameMaster : MonoBehaviour {
             GameObject leftPopEffect = Instantiate(popEffect);
             leftPopEffect.transform.position = connectors[leftchild].transform.position;
             GameObject rightPopEffect = Instantiate(popEffect);
-			rightPopEffect.transform.position = connectors[rightchild].transform.position;
+            rightPopEffect.transform.position = connectors[rightchild].transform.position;
 
-			Destroy(leftPopEffect, 3);
-			Destroy(rightPopEffect, 3);
+            Destroy(leftPopEffect, 3);
+            Destroy(rightPopEffect, 3);
             destroyConnectors(leftchild);
             Destroy(nodes[leftchild], 3);
             Destroy(nodes[rightchild], 3);
@@ -167,11 +167,11 @@ public class GameMaster : MonoBehaviour {
     } // .destroyConnectors(int leftchild)
 
     private bool doHaveChild(int leftParent) {
-        int rightParent = leftParent + 1; 			// Sibling of Left Parent (Right Parent)
-        int leftLeftChild = leftParent * 2; 		// Left Child of Left Parent
-		int leftRightChild = leftLeftChild + 1; 	// Right Child Of Left Parent
-        int rightLeftChild = rightParent * 2; 		// Left Child Of Right Parent
-		int rightRightChild = rightLeftChild + 1;  // Right Child Of Right Parent
+        int rightParent = leftParent + 1;             // Sibling of Left Parent (Right Parent)
+        int leftLeftChild = leftParent * 2;         // Left Child of Left Parent
+        int leftRightChild = leftLeftChild + 1;     // Right Child Of Left Parent
+        int rightLeftChild = rightParent * 2;         // Left Child Of Right Parent
+        int rightRightChild = rightLeftChild + 1;  // Right Child Of Right Parent
         bool case1 = true, case2 = true, case3 = true, case4 = true;
 
         if (leftLeftChild < nodes.Length && leftRightChild < nodes.Length && rightLeftChild < nodes.Length && rightRightChild < nodes.Length) {
@@ -194,9 +194,9 @@ public class GameMaster : MonoBehaviour {
         int leftParent = grandParent * 2;           // Left Child of Grandparent (Left Parent)
         int rightParent = leftParent + 1;           // Right Child of Grandparent (Right Parent)
         int leftLeftChild = leftParent * 2;         // Left Child of Left Parent
-		int leftRightChild = leftLeftChild + 1;     // Right Child Of Left Parent
+        int leftRightChild = leftLeftChild + 1;     // Right Child Of Left Parent
         int rightLeftChild = rightParent * 2;       // Left Child Of Right Parent
-		int rightRightChild = rightLeftChild + 1;   // Right Child Of Right Parent
+        int rightRightChild = rightLeftChild + 1;   // Right Child Of Right Parent
 
         if (child == leftLeftChild || child == leftRightChild) {
             bool case1 = (nodes[rightLeftChild] == null || nodes[rightLeftChild].tag == "NULL");
@@ -220,22 +220,22 @@ public class GameMaster : MonoBehaviour {
     } // .restart()
 
     private int depthOf(int thatNode) {
-    	if (thatNode >= nodes.Length && thatNode <= 1)
-    		return 0;
+        if (thatNode >= nodes.Length && thatNode <= 1)
+            return 0;
 
-    	if (thatNode <= 3)
-    		return 1;
+        if (thatNode <= 3)
+            return 1;
 
-    	int z = 3;
-    	int n = 2;
-    	int depth = 1;
+        int z = 3;
+        int n = 2;
+        int depth = 1;
 
-    	while(z < thatNode) {
-    		z += (int) Mathf.Pow(2, n);
-    		n++;
-    		depth++;
-    	}
+        while(z < thatNode) {
+            z += (int) Mathf.Pow(2, n);
+            n++;
+            depth++;
+        }
 
-    	return depth;
+        return depth;
     } // .depthOf(int thatNode)
 }
